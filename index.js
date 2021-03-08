@@ -126,5 +126,5 @@ app.get("/upload", async (req,res) =>
         res.status(500).json({alert:"error"});
     }
 });
-var port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 app.listen(port);
