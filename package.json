@@ -1,12 +1,20 @@
 {
   "name": "nodeproj",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "",
+  "scripts": 
+  {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt":"~5.0.1",
+    "bcrypt.js":"~2.4.3",
+    "cors": "~2.8.5",
+    "express": "~4.17.1",
+    "mongodb": "~3.6.4"
+  }
 }
