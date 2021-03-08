@@ -2,10 +2,10 @@
   "name": "nodeproj",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "",
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC"
