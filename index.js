@@ -8,6 +8,7 @@ const json = require('jsonwebtoken');
 app.use(cors());
 app.use(express.json());
 const Database = "ChamDB";
+const logdb = [];
 const url = "mongodb+srv://sm1:admin@cluster0.w2ual.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 app.post("/signup",async (req,res) =>
 {
@@ -43,6 +44,7 @@ app.post("/signin",async (req,res) =>
             let result = await bcryptjs.compare(req.body.Passcode,user.Passcode);
             if(result)
             {
+                logdb.push(req.body.Email);
                 let token = json.sign({_id : user._id},'alphabetagamatheta');    
                 console.log(token);            
                 res.status(200).json({alert:"Login Successfully",token});
@@ -117,6 +119,181 @@ app.get("/upload", async (req,res) =>
                 return res.status(500).send(error);
             }
             res.send(result);
+        });
+        connection.close();
+    }
+    catch(error)
+    {
+        console.log(error);
+        res.status(500).json({alert:"error"});
+    }
+});
+app.get("/userDashboard", async (req,res) =>
+{
+    var email = logdb[logdb.length-1];
+    var urls=[];
+    try
+    {
+        let connection = await MongodbClient.connect(url);
+        let db = connection.db(Database);
+        let collection = db.collection("Uploads");
+        collection.find({}).toArray((error, result) => 
+        {
+            if(error) 
+            {
+                return res.status(500).send(error);
+            }
+            for(var i=0;i<result.length;i++)
+            {
+                if(result[i].Email==email)
+                    urls.push(result[i].Link);
+            }   
+            res.send(urls); 
+        });
+        connection.close();
+    }
+    catch(error)
+    {
+        console.log(error);
+        res.status(500).json({alert:"error"});
+    }
+});
+app.get("/g1", async (req,res) =>
+{
+    var urls=[];
+    try
+    {
+        let connection = await MongodbClient.connect(url);
+        let db = connection.db(Database);
+        let collection = db.collection("Uploads");
+        collection.find({}).toArray((error, result) => 
+        {
+            if(error) 
+            {
+                return res.status(500).send(error);
+            }
+            for(var i=0;i<result.length;i++)
+            {
+                if(result[i].Hashtag=="music"||result[i].Hashtag=="dance")
+                    urls.push(result[i].Link);
+            }   
+            res.send(urls); 
+        });
+        connection.close();
+    }
+    catch(error)
+    {
+        console.log(error);
+        res.status(500).json({alert:"error"});
+    }
+});
+app.get("/g2", async (req,res) =>
+{
+    var urls=[];
+    try
+    {
+        let connection = await MongodbClient.connect(url);
+        let db = connection.db(Database);
+        let collection = db.collection("Uploads");
+        collection.find({}).toArray((error, result) => 
+        {
+            if(error) 
+            {
+                return res.status(500).send(error);
+            }
+            for(var i=0;i<result.length;i++)
+            {
+                if(result[i].Hashtag=="acting"||result[i].Hashtag=="drama")
+                    urls.push(result[i].Link);
+            }   
+            res.send(urls); 
+        });
+        connection.close();
+    }
+    catch(error)
+    {
+        console.log(error);
+        res.status(500).json({alert:"error"});
+    }
+});
+app.get("/g3", async (req,res) =>
+{
+    var urls=[];
+    try
+    {
+        let connection = await MongodbClient.connect(url);
+        let db = connection.db(Database);
+        let collection = db.collection("Uploads");
+        collection.find({}).toArray((error, result) => 
+        {
+            if(error) 
+            {
+                return res.status(500).send(error);
+            }
+            for(var i=0;i<result.length;i++)
+            {
+                if(result[i].Hashtag=="graphic"||result[i].Hashtag=="photography")
+                    urls.push(result[i].Link);
+            }   
+            res.send(urls); 
+        });
+        connection.close();
+    }
+    catch(error)
+    {
+        console.log(error);
+        res.status(500).json({alert:"error"});
+    }
+});
+app.get("/g4", async (req,res) =>
+{
+    var urls=[];
+    try
+    {
+        let connection = await MongodbClient.connect(url);
+        let db = connection.db(Database);
+        let collection = db.collection("Uploads");
+        collection.find({}).toArray((error, result) => 
+        {
+            if(error) 
+            {
+                return res.status(500).send(error);
+            }
+            for(var i=0;i<result.length;i++)
+            {
+                if(result[i].Hashtag=="sketching"||result[i].Hashtag=="painting")
+                    urls.push(result[i].Link);
+            }   
+            res.send(urls); 
+        });
+        connection.close();
+    }
+    catch(error)
+    {
+        console.log(error);
+        res.status(500).json({alert:"error"});
+    }
+});
+app.get("/g5", async (req,res) =>
+{
+    var urls=[];
+    try
+    {
+        let connection = await MongodbClient.connect(url);
+        let db = connection.db(Database);
+        let collection = db.collection("Uploads");
+        collection.find({}).toArray((error, result) => 
+        {
+            if(error) 
+            {
+                return res.status(500).send(error);
+            }
+            for(var i=0;i<result.length;i++)
+            {
+                if(result[i].Hashtag=="others")
+                    urls.push(result[i].Link);
+            }   
+            res.send(urls); 
         });
         connection.close();
     }
